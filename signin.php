@@ -1,4 +1,28 @@
-<?php
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+</head>
+<body>
+<h2>Sign In</h2>
+    <form action="display.php" method="post">
+        <fieldset>
+            <legend><h3>Personal Details</h3></legend>
+            <pre>Name: <input type="text" name="name" required>
+    </pre>
+       
+      
+        
+        <pre>Phone number: <input type="text" name="phn"  required>
+    </pre>
+        </fieldset>
+     <br><br>
+
+     <?php
 if(isset($_POST['name'])){
 
 $server="localhost";
@@ -11,13 +35,13 @@ if(!$con){
            if (isset($_POST['name'])){
             $name=$_POST['name'];
         }else {
-            $name=NULL;
+         echo"please fill your name";
         }
 
            if (isset($_POST['phn'])){
             $phn=$_POST['phn'];
         }else {
-            $phn=NULL;
+            echo"please fill your phone number";
         }
 
 
@@ -27,15 +51,16 @@ if(!$con){
 
         if($numb==1){
            
-            echo "  <table>
-            <tr>
-            <th>name</th>
-            <th>phone number</th>
-            </tr>
-            <tr><td>".$name."</td>"."<td>".$phn."</td></tr></table>";
+           
 
-            echo "<a href=\"signin.php\">logout</a>";
             
+            session_start();
+            
+            $_SESSION['name']=$name;
+           
+            $_SESSION['phn']=$phn;
+            
+            //echo "<script>location.href='display.php'</script>";
         }
         else{
            
@@ -48,27 +73,7 @@ if(!$con){
 
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
-</head>
-<body>
-<h2>Sign In</h2>
-    <form action="" method="post">
-        <fieldset>
-            <legend><h3>Personal Details</h3></legend>
-        <label for="name">Full Name </label>
-        <input type="text" id="name" placeholder="name" name="name">
-        <br><br>
-        <label for="name">Phone number </label>
-        <input type="text" id="phn" placeholder="Phone number" name="phn">        
-        </fieldset>
-     <br><br>
-     <input type="submit">
+     <input type="submit" value="Next">
      <a href="signup.php">Dont have an account? signup</a>
         </form>
 
